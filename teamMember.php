@@ -103,6 +103,6 @@ function display_team_member(){
         echo '</table>';
     }
 }
-echo get_post_meta( get_the_ID(), 'my-info', true );
+
 new TeamMember1();
 ?>
