@@ -14,10 +14,10 @@ class TeamMember1{
         add_shortcode('shortcode_members_1', array($this, 'display_team_member'));
     }
     function create_team_member(){
-        register_post_type( 'team_member_1',
+        register_post_type( 'team_member',
         array(
             'labels' => array(
-                'name' => 'Team Members 1',
+                'name' => 'Team Members',
                 'add_new' => 'Add New',
                 'add_new_item' => 'Add New Team Member',
                 'edit' => 'Edit',
@@ -45,7 +45,7 @@ function your_prefix_get_meta_box( $meta_boxes ) {
     $meta_boxes[] = array(
         'id' => 'team_member',
         'title' => esc_html__( 'Other Information', 'metabox-online-generator' ),
-        'post_types' => 'team_member_1',
+        'post_types' => 'team_member',
         'context' => 'advanced',
         'priority' => 'default',
         'autosave' => 'true',
@@ -79,9 +79,14 @@ function your_prefix_get_meta_box( $meta_boxes ) {
     );
     return $meta_boxes;
 }
-function display_team_member(){
-        $mypost = array( 'post_type' => 'team_member_1', );
+function display_team_member($atts){
+        $mypost = array( 'post_type' => 'team_member' );
         $loop = new WP_Query( $mypost );
+        $value = shortcode_atts( array(
+            'email' => '',
+            'phone' => '',
+            'website' => ''
+        ), $atts );
         echo '<table>';
         echo '<tr>';
         while ( $loop->have_posts() ) : 
