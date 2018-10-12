@@ -83,9 +83,9 @@ function display_team_member($atts){
         $mypost = array( 'post_type' => 'team_member' );
         $loop = new WP_Query( $mypost );
         $attr = shortcode_atts( array(
-            'email' => $atts['email'],
-            'phone' => $atts['phone'],
-            'website' => $atts['website']
+            'email' => '',
+            'phone' => '',
+            'website' => ''
         ), $atts );
         echo '<table>';
         echo '<tr>';
