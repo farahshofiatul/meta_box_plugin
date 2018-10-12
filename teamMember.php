@@ -82,10 +82,10 @@ function your_prefix_get_meta_box( $meta_boxes ) {
 function display_team_member($atts){
         $mypost = array( 'post_type' => 'team_member' );
         $loop = new WP_Query( $mypost );
-        $value = shortcode_atts( array(
-            'email' => '',
-            'phone' => '',
-            'website' => ''
+        $attr = shortcode_atts( array(
+            'email' => $atts['email'],
+            'phone' => $atts['phone'],
+            'website' => $atts['website']
         ), $atts );
         echo '<table>';
         echo '<tr>';
@@ -98,9 +98,15 @@ function display_team_member($atts){
                  echo '<img src= "'.$value['url'].'"></br>';
             }
             echo esc_html( get_post_meta( get_the_ID(), 'prefix-position', true )).'</br>';
-            echo esc_html( get_post_meta( get_the_ID(), 'prefix-email', true )).'</br>';
-            echo esc_html( get_post_meta( get_the_ID(), 'prefix-phone', true )).'</br>';
-            echo esc_html( get_post_meta( get_the_ID(), 'prefix-website', true )).'</br>';
+            if($attr['email']){
+                echo esc_html( get_post_meta( get_the_ID(), 'prefix-email', true )).'</br>';
+            }
+            else if($attr['phone']){
+                echo esc_html( get_post_meta( get_the_ID(), 'prefix-phone', true )).'</br>';
+            }
+            else if($attr['website']){
+                echo esc_html( get_post_meta( get_the_ID(), 'prefix-website', true )).'</br>';
+            }
             echo '</center>';
             echo '</td>';
         endwhile;
